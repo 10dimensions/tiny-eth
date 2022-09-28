@@ -1,0 +1,75 @@
+// # The Question
+
+// A core concept in blockchains is the ability to store and access a historical record of account balances. Design a structure allows setting and retrieving the latest value at a certain block height.
+
+// **Example interface:**
+
+// - `set(account, balance)`
+// - `get(account, height)`
+// - `increment_height()`
+
+// **Example flow:**
+
+// - `initialize` → height=0
+// - `set(A, 1)`
+// - `increment_height()`
+// - `set(B, 2)`
+// - `increment_height()`
+// - `set(A, 3)`
+// - `increment_height()`
+// - `get(A, 0)` → returns 1
+// - `get(B, 0)` → returns 0
+// - `get(B, 1)` → returns 2
+// - `get(A, 1)` → returns 1
+// - `get(B, 2)` -> returns 2
+// - `get(A, 2)` → returns  3
+
+package main
+
+import (
+	"fmt"
+)
+
+
+//accounts := make(map[string]int)
+var accounts = make(map[string]map[int]int)
+var height int
+
+func initialize(){
+	height = 0
+}
+
+func get(address string, height int) int{
+	fmt.Println(accounts[address][height])
+	return accounts[address][height]
+}
+
+func set(address string, balance int){
+	//increase_height()
+	accounts[address] = address
+	
+  accounts[address][height] = balance;
+}
+
+func increment_height() int{
+	height += 1;
+	return height;
+}
+
+func main(){
+	initialize()
+
+	set("A", 1)
+	increment_height()
+	set("B", 2)
+	increment_height()
+	set("A", 3)
+	increment_height()
+	get("A", 0)
+	get("B", 0)
+	get("B", 1)
+	get("A", 1)
+	get("B", 2)
+	get("A", 2)
+
+}
